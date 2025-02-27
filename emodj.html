@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор смайликов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content .smiley-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+        .dropdown-content img {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        #messageInput {
+            width: 300px;
+            height: 100px;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn">Выбрать смайлик</button>
+        <div class="dropdown-content">
+            <div class="smiley-row">
+                <img src="windows 11/face/smiling-face-with-smiling-eyes.png" alt="Smiley 1" onclick="addSmiley('😊')">
+                <img src="windows 11/face/happy-face.png" alt="Smiley 2" onclick="addSmiley('😀')">
+                <img src="windows 11/face/beaming-face-with-smiling-eyes.png" alt="Smiley 3" onclick="addSmiley('😄')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/smiling-face-with-sunglasses.png" alt="Smiley 4" onclick="addSmiley('😎')">
+                <img src="windows 11/face/smiling-face-with-heart-eyes.png" alt="Smiley 5" onclick="addSmiley('😍')">
+                <img src="windows 11/face/pouting-face.png" alt="Smiley 6" onclick="addSmiley('😡')">
+            </div>
+        </div>
+    </div>
+    <textarea id="messageInput" placeholder="Введите сообщение"></textarea>
+    <script>
+        function addSmiley(smiley) {
+            var messageInput = document.getElementById('messageInput');
+            messageInput.value += smiley;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/ico.png">
+    <title>Gigachat</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="chat-container">
+        <ul id="messages"></ul>
+    </div>
+    <input type="text" id="nameInput" placeholder="Ваше имя">
+    <input type="text" id="messageInput" placeholder="Введите сообщение" disabled>
+    <div id="sendButtonContainer">
+        <div class="button-container">
+            <button class="send-button" onclick="sendMessage()" disabled>Отправить</button>
+            <button class="dropbtn" onclick="openModal()">Выбрать смайлик</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для смайликов -->
+    <div id="smileyModal" class="modal">
+        <div class="modal-content">
+            <div class="smiley-row">
+                <img src="windows 11/face/angry-face.png" alt="Smiley " onclick="addSmiley('😠')">
+                <img src="windows 11/face/anguished-face.png" alt="Smiley " onclick="addSmiley('😧')">
+                <img src="windows 11/face/anxious-face-with-sweat.png" alt="Smiley " onclick="addSmiley('😰')">
+                <img src="windows 11/face/astonished-face.png" alt="Smiley " onclick="addSmiley('😲')">
+                <img src="windows 11/face/beaming-face-with-smiling-eyes.png" alt="Smiley " onclick="addSmiley('😁')">
+                <img src="windows 11/face/confounded-face.png" alt="Smiley " onclick="addSmiley('😖')">
+        
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/confused-face.png" alt="Smiley " onclick="addSmiley('😕')">
+                <img src="windows 11/face/crying-face.png" alt="Smiley " onclick="addSmiley('😥')">
+                <img src="windows 11/face/disappointed-face.png" alt="Smiley " onclick="addSmiley('😞')">
+                <img src="windows 11/face/disappointed-face-1.png" alt="Smiley " onclick="addSmiley('😔')">
+                <img src="windows 11/face/dizzy-face.png" alt="Smiley " onclick="addSmiley('😵')">
+                <img src="windows 11/face/downcast-face-with-sweat.png" alt="Smiley " onclick="addSmiley('😓')">
+        
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/expressionless-face.png" alt="Smiley " onclick="addSmiley('😑')">
+                <img src="windows 11/face/face-blowing-a-kiss.png" alt="Smiley " onclick="addSmiley('😘')">
+                <img src="windows 11/face/winking-face-with-tongue.png" alt="Smiley " onclick="addSmiley('😜')">
+                <img src="windows 11/face/worried-face.png" alt="Smiley " onclick="addSmiley('😟')">
+                <img src="windows 11/face/face-savouring-food.png" alt="Smiley " onclick="addSmiley('😋')">
+                <img src="windows 11/face/smiling-face-with-sunglasses.png" alt="Smiley " onclick="addSmiley('😎')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/face-screaming-in-fear.png" alt="Smiley " onclick="addSmiley('😱')">
+                <img src="windows 11/face/face-with-medical-mask.png" alt="Smiley " onclick="addSmiley('😷')">
+                <img src="windows 11/face/face-with-open-mouth.png" alt="Smiley " onclick="addSmiley('😮')">
+                <img src="windows 11/face/face-without-mouth.png" alt="Smiley " onclick="addSmiley('😶')">
+                <img src="windows 11/face/face-with-spiral-eyes.png" alt="Smiley " onclick="addSmiley('🥴')">
+                <img src="windows 11/face/smirking-face.png" alt="Smiley " onclick="addSmiley('😏')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/face-with-steam-from-nose.png" alt="Smiley " onclick="addSmiley('😤')">
+                <img src="windows 11/face/face-with-tears-of-joy.png" alt="Smiley " onclick="addSmiley('😂')">
+                <img src="windows 11/face/face-with-tongue.png" alt="Smiley " onclick="addSmiley('😛')">
+                <img src="windows 11/face/fearful-face.png" alt="Smiley " onclick="addSmiley('😨')">
+                <img src="windows 11/face/flushed-face.png" alt="Smiley " onclick="addSmiley('😳')">
+                <img src="windows 11/face/squinting-face-with-tongue.png" alt="Smiley " onclick="addSmiley('😝')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/frowning-face-with-open-mouth.png" alt="Smiley " onclick="addSmiley('😦')">
+                <img src="windows 11/face/grimacing-face.png" alt="Smiley " onclick="addSmiley('😬')">
+                <img src="windows 11/face/grinning-face-with-smiling-eyes.png" alt="Smiley " onclick="addSmiley('😄')">
+                <img src="windows 11/face/grinning-face-with-sweat.png" alt="Smiley " onclick="addSmiley('😅')">
+                <img src="windows 11/face/grinning-squinting-face.png" alt="Smiley " onclick="addSmiley('😆')">
+                <img src="windows 11/face/winking-face.png" alt="Smiley " onclick="addSmiley('😉')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/happy-face.png" alt="Smiley " onclick="addSmiley('😃')">
+                <img src="windows 11/face/happy-face-with-enlarged-eyes.png" alt="Smiley " onclick="addSmiley('😀')">
+                <img src="windows 11/face/hushed-face.png" alt="Smiley " onclick="addSmiley('😯')">
+                <img src="windows 11/face/kissing-face.png" alt="Smiley " onclick="addSmiley('😗')">
+                <img src="windows 11/face/kissing-face-with-closed-eyes.png" alt="Smiley " onclick="addSmiley('😙')">
+                <img src="windows 11/face/tired-face.png" alt="Smiley " onclick="addSmiley('😫')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/kissing-face-with-smiling-eyes.png" alt="Smiley " onclick="addSmiley('😚')">
+                <img src="windows 11/face/loudly-crying-face.png" alt="Smiley " onclick="addSmiley('😭')">
+                <img src="windows 11/face/neutral-face.png" alt="Smiley " onclick="addSmiley('😐')">
+                <img src="windows 11/face/persevering-face.png" alt="Smiley " onclick="addSmiley('😐')">
+                <img src="windows 11/face/pouting-face.png" alt="Smiley " onclick="addSmiley('😡')">
+                <img src="windows 11/face/unamused-face.png" alt="Smiley " onclick="addSmiley('😒')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/relieved-face.png" alt="Smiley " onclick="addSmiley('😌')">
+                <img src="windows 11/face/sleeping-face.png" alt="Smiley " onclick="addSmiley('😴')">
+                <img src="windows 11/face/sleepy-face.png" alt="Smiley " onclick="addSmiley('😪')">
+                <img src="windows 11/face/smiling-face-with-halo.png" alt="Smiley " onclick="addSmiley('😇')">
+                <img src="windows 11/face/smiling-face-with-heart-eyes.png" alt="Smiley " onclick="addSmiley('😍')">
+                <img src="windows 11/face/weary-face.png" alt="Smiley " onclick="addSmiley('😩')">
+            </div>
+            <div class="smiley-row">
+                <img src="windows 11/face/smiling-face-with-horns.png" alt="Smiley " onclick="addSmiley('😈')">
+                <img src="windows 11/face/smiling-face-with-smiling-eyes.png" alt="Smiley " onclick="addSmiley('😊')">
+            </div>
+            <!-- Add the rest of the smiley rows here -->
+        </div>
+    </div>
+</body>
+</html>
