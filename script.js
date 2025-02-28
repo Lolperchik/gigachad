@@ -21,7 +21,7 @@ window.onclick = function(event) {
     }
 }
 
-var socket = io('http://192.168.100.53:5000');
+var socket = io('http://0.0.0.0:5000');
 var nameInput = document.getElementById('nameInput');
 var messageInput = document.getElementById('messageInput');
 var sendButton = document.querySelector('.send-button');
